@@ -17,22 +17,39 @@
 
 */
 
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-int main(int argc, char *argv[]){
-
-	unsigned int length = atoi(argv[2]); 
-	unsigned char *address = getenv(argv[1]);
-
-	printf("  [+] The variable %s is at: %p\n", argv[1], address );
-
-	printf("  [+] Memory content at %p\n", address);
-  printf("      ");
-	for (int x=1; x<=length; x++) {
-		printf("\\x%1X", *address);
-    	address++;
+int main(int argc, char *argv[], char *envp[])
+{
+  if (argc < 2)
+  {
+    //print all
+    while (*envp != NULL)
+    {
+      printf("\t[+] Addr of variable %s -> %p\n", *envp);
+      envp++;
     }
-	   
+    return 0;
+  }
 
+  unsigned int length = atoi(argv[2]);
+  unsigned char *address = getenv(argv[1]);
+
+  if (address == NULL)
+  {
+    printf("variable %s not found\n", argv[1]);
+    return -1;
+  }
+  printf("\t[+] The variable %s is at: %p\n", argv[1], address);
+
+  printf("\t[+] Memory content at %p\n", address);
+  printf("\t\t");
+  for (int x = 1; x <= length; x++)
+  {
+    printf("\\x%1X", *address);
+    address++;
+  }
+  printf("\n");
+  return 0;
 }
