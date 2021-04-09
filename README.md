@@ -1,5 +1,6 @@
 # offensivetools
-My little tools created to study and practice offensive thinking
+My little tools created to study and practice my offensive thinking
+https://www.offensivethink.com
 
 ## Byte Array Generator
 Generate partial or full bytearray to help at binary exploitation
